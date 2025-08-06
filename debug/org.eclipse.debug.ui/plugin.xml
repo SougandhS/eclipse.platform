@@ -1557,6 +1557,14 @@
             id="org.eclipse.debug.ui.variablesView.popupMenu">
       <!-- Variable Group -->
          <action
+               label="%VariableClipboardCompare.label"
+               class="org.eclipse.debug.internal.ui.actions.variables.VariableClipboardCompareAction"
+               menubarPath="variableGroup"
+               icon="$nl$/icons/full/elcl16/compareVariableClipboard.svg"
+               enablesFor="1"
+               id="org.eclipse.debug.ui.actions.CompareVariableValue">
+         </action>
+         <action
                label="%CopyVariablesToClipboardAction.label"
                icon="$nl$/icons/full/elcl16/copy_edit_co.svg"
                definitionId="org.eclipse.ui.edit.copy"
