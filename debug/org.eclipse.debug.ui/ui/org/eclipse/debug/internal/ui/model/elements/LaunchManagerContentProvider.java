@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,8 @@ package org.eclipse.debug.internal.ui.model.elements;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.internal.ui.DebugUIPlugin;
+import org.eclipse.debug.internal.ui.preferences.IDebugPreferenceConstants;
 import org.eclipse.debug.internal.ui.viewers.model.provisional.IPresentationContext;
 import org.eclipse.debug.internal.ui.viewers.model.provisional.IViewerUpdate;
 import org.eclipse.debug.ui.IDebugUIConstants;
@@ -26,7 +28,7 @@ public class LaunchManagerContentProvider extends ElementContentProvider {
 
 	@Override
 	protected int getChildCount(Object element, IPresentationContext context, IViewerUpdate monitor) throws CoreException {
-		return ((ILaunchManager)element).getLaunches().length;
+		return ((ILaunchManager) element).getLaunches().length;
 	}
 
 	@Override
@@ -36,7 +38,10 @@ public class LaunchManagerContentProvider extends ElementContentProvider {
 
 	@Override
 	protected Object[] getChildren(Object parent, int index, int length, IPresentationContext context, IViewerUpdate monitor) throws CoreException {
-		return getElements(((ILaunchManager)parent).getLaunches(),index, length);
+		boolean orderByLatest = DebugUIPlugin.getDefault().getPreferenceStore()
+				.getBoolean(IDebugPreferenceConstants.LAUNCH_ORDER_BY_LATEST);
+		return getElements(orderByLatest ? ((ILaunchManager) parent).getLaunchesInReverse()
+				: ((ILaunchManager) parent).getLaunches(), index, length);
 	}
 
 }

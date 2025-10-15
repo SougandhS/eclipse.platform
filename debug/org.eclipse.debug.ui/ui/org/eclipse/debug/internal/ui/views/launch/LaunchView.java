@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2021 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -212,6 +212,11 @@ public class LaunchView extends AbstractDebugView
 	 * Action which shows or hides the Debug view toolbar.
 	 */
 	private DebugToolBarAction fDebugToolBarAction;
+
+	/**
+	 * Action which order the launches by latest.
+	 */
+	private LaunchOrder fLaunchOrder;
 
 	/**
 	 * Action that controls the breadcrumb drop-down auto-expand behavior.
@@ -728,6 +733,7 @@ public class LaunchView extends AbstractDebugView
 		fDebugViewModeActions[1] = new DebugViewModeAction(this, IDebugPreferenceConstants.DEBUG_VIEW_MODE_FULL, parent);
 		fDebugViewModeActions[2] = new DebugViewModeAction(this, IDebugPreferenceConstants.DEBUG_VIEW_MODE_COMPACT, parent);
 		fBreadcrumbDropDownAutoExpandAction = new BreadcrumbDropDownAutoExpandAction(this);
+		fLaunchOrder = new LaunchOrder(this);
 		viewMenu.add(new Separator());
 
 		final MenuManager modeSubmenu = new MenuManager(LaunchViewMessages.LaunchView_ViewModeMenu_label);
@@ -737,6 +743,8 @@ public class LaunchView extends AbstractDebugView
 		modeSubmenu.add(fDebugViewModeActions[2]);
 		modeSubmenu.add(new Separator());
 		modeSubmenu.add(fBreadcrumbDropDownAutoExpandAction);
+		modeSubmenu.add(new Separator());
+		modeSubmenu.add(fLaunchOrder);
 		viewMenu.add(modeSubmenu);
 
 		modeSubmenu.addMenuListener(manager -> {
@@ -745,6 +753,8 @@ public class LaunchView extends AbstractDebugView
 			modeSubmenu.add(fDebugViewModeActions[2]);
 			modeSubmenu.add(new Separator());
 			modeSubmenu.add(fBreadcrumbDropDownAutoExpandAction);
+			modeSubmenu.add(new Separator());
+			modeSubmenu.add(fLaunchOrder);
 		});
 	}
 

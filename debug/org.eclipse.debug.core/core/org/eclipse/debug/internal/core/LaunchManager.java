@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1311,9 +1310,7 @@ public class LaunchManager extends PlatformObject implements ILaunchManager, IRe
 			return allConfigs.toArray(new ILaunchConfiguration[allConfigs.size()]);
 		} else {
 			List<ILaunchConfiguration> select = new ArrayList<>(allConfigs.size());
-			Iterator<ILaunchConfiguration> iterator = allConfigs.iterator();
-			while (iterator.hasNext()) {
-				ILaunchConfiguration config = iterator.next();
+			for (ILaunchConfiguration config : allConfigs) {
 				try {
 					if ((config.getKind() & kinds) > 0) {
 						select.add(config);
@@ -1384,6 +1381,17 @@ public class LaunchManager extends PlatformObject implements ILaunchManager, IRe
 		}
 	}
 
+	@Override
+	public ILaunch[] getLaunchesInReverse() {
+		ILaunch[] launches = getLaunches();
+		for (int i = 0; i < launches.length / 2; i++) {
+			ILaunch curr = launches[i];
+			launches[i] = launches[launches.length - 1 - i];
+			launches[launches.length - 1 - i] = curr;
+		}
+		return launches;
+
+	}
 	@Override
 	public ILaunchMode getLaunchMode(String mode) {
 		initializeLaunchModes();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2017 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -320,6 +320,15 @@ public interface ILaunchManager {
 	 * @return an array of launches
 	 */
 	ILaunch[] getLaunches();
+
+	/**
+	 * Returns the reversed collection of launches from
+	 * {@link ILaunchManager#getLaunches()}.
+	 *
+	 * @return An array of launches
+	 * @since 3.24
+	 */
+	ILaunch[] getLaunchesInReverse();
 
 	/**
 	 * Returns the launch mode registered with the given mode identifier,

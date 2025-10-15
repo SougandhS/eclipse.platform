@@ -336,6 +336,7 @@ public interface IDebugPreferenceConstants {
 	 */
 	String DEBUG_VIEW_TOOLBAR_HIDDEN_PERSPECTIVES = "org.eclipse.debug.ui.Debug_view.debug_toolbar_hidden_perspectives"; //$NON-NLS-1$
 	String CONSOLE_ELAPSED_FORMAT = "org.eclipse.console.elapsedTimeFormat"; //$NON-NLS-1$
+	String LAUNCH_ORDER_BY_LATEST = "org.eclipse.debug.ui.launch.order"; //$NON-NLS-1$
 }
 
 
